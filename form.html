@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obtenez votre site en 3 minutes — Lokalweb</title>
+  <meta name="description" content="Remplissez le formulaire en 3 minutes et obtenez un aperçu de votre site professionnel sous 2-3 minutes.">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue: #1E3A5F;
+      --blue-light: #2A4F7F;
+      --orange: #F97316;
+      --orange-hover: #EA6C0E;
+      --white: #FFFFFF;
+      --gray-50: #F9FAFB;
+      --gray-100: #F3F4F6;
+      --gray-200: #E5E7EB;
+      --gray-500: #6B7280;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --red: #EF4444;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--gray-900);
+      line-height: 1.6;
+      background: var(--gray-50);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .container { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Header ── */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px; max-width: 1120px; margin: 0 auto; padding: 0 24px;
+    }
+    .logo { font-size: 1.4rem; font-weight: 900; color: var(--blue); }
+    .logo span { color: var(--orange); }
+    .nav { display: flex; align-items: center; gap: 28px; }
+    .nav a { font-weight: 600; font-size: 0.9rem; color: var(--gray-700); }
+    .nav a:hover { color: var(--orange); }
+    .btn-nav {
+      background: var(--orange); color: var(--white);
+      padding: 9px 22px; border-radius: 50px;
+      font-weight: 700; font-size: 0.9rem;
+    }
+    .btn-nav:hover { background: var(--orange-hover); }
+
+    /* ── Hero ── */
+    .page-hero {
+      padding: 110px 0 48px;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
+      color: var(--white); text-align: center;
+    }
+    .page-hero h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 900; margin-bottom: 12px; letter-spacing: -0.5px;
+    }
+    .page-hero p { font-size: 1.1rem; opacity: 0.85; }
+
+    /* ── Form Card ── */
+    .form-page { padding: 40px 0 80px; }
+
+    .form-card {
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.10);
+      overflow: hidden;
+    }
+
+    .form-body { padding: 36px 40px 44px; }
+
+    .form-section { margin-bottom: 28px; }
+
+    .form-section-title {
+      font-size: 0.78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--blue); margin-bottom: 16px;
+      padding-bottom: 8px; border-bottom: 2px solid var(--gray-100);
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-row.single { grid-template-columns: 1fr; }
+
+    .form-field { display: flex; flex-direction: column; gap: 5px; }
+
+    .form-field label { font-size: 0.875rem; font-weight: 600; color: var(--gray-700); }
+    .form-field label .req { color: var(--orange); margin-left: 2px; }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      padding: 11px 13px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      color: var(--gray-900);
+      background: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      font-family: inherit;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 38px;
+    }
+
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(30,58,95,0.08);
+    }
+
+    .form-field input.error,
+    .form-field select.error,
+    .form-field textarea.error {
+      border-color: var(--red);
+    }
+
+    .form-field textarea { resize: vertical; min-height: 88px; line-height: 1.5; }
+
+    .field-error { font-size: 0.78rem; color: var(--red); font-weight: 500; display: none; }
+    .field-error.show { display: block; }
+
+    /* Checkboxes */
+    .checkboxes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    .checkbox-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px;
+      border: 1.5px solid var(--gray-200); border-radius: 10px;
+      cursor: pointer; transition: all 0.2s; user-select: none;
+    }
+    .checkbox-item:hover { border-color: var(--blue); background: rgba(30,58,95,0.03); }
+    .checkbox-item input[type="checkbox"] {
+      width: 16px; height: 16px; accent-color: var(--orange);
+      cursor: pointer; flex-shrink: 0; margin: 0; padding: 0;
+      border: none; box-shadow: none; appearance: auto;
+    }
+    .checkbox-item span { font-size: 0.875rem; font-weight: 500; color: var(--gray-700); }
+    .checkbox-item:has(input:checked) { border-color: var(--orange); background: rgba(249,115,22,0.05); }
+
+    /* Radio */
+    .radio-group { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+    .radio-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 16px;
+      border: 1.5px solid var(--gray-200); border-radius: 10px;
+      cursor: pointer; font-size: 0.875rem; font-weight: 500;
+      transition: all 0.2s;
+    }
+    .radio-item:hover { border-color: var(--blue); }
+    .radio-item input[type="radio"] { accent-color: var(--orange); }
+    .radio-item:has(input:checked) { border-color: var(--orange); background: rgba(249,115,22,0.05); }
+
+    /* Submit */
+    .form-submit {
+      width: 100%; padding: 17px 36px;
+      font-size: 1.05rem; font-weight: 700;
+      border-radius: 50px; border: none; cursor: pointer;
+      background: var(--orange); color: var(--white);
+      box-shadow: 0 4px 16px rgba(249,115,22,0.35);
+      transition: all 0.25s ease;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin-top: 14px;
+    }
+    .form-submit:hover:not(:disabled) {
+      background: var(--orange-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(249,115,22,0.45);
+    }
+    .form-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2.5px solid rgba(255,255,255,0.3);
+      border-top-color: white; border-radius: 50%;
+      animation: spin 0.7s linear infinite; display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Status & success */
+    .form-status {
+      border-radius: 10px; padding: 14px 18px;
+      font-size: 0.9rem; font-weight: 600;
+      margin-top: 12px; display: none;
+    }
+    .form-status.error { display: block; background: #FEF2F2; color: var(--red); border: 1px solid #FECACA; }
+
+    .success-card {
+      display: none;
+      text-align: center; padding: 60px 40px;
+    }
+    .success-card.show { display: block; }
+    .success-card .icon { font-size: 3.5rem; margin-bottom: 16px; }
+    .success-card h2 { font-size: 1.6rem; font-weight: 800; color: var(--blue); margin-bottom: 12px; }
+    .success-card p { font-size: 1rem; color: var(--gray-700); line-height: 1.7; max-width: 440px; margin: 0 auto 24px; }
+    .success-card a {
+      display: inline-block; background: var(--blue); color: white;
+      padding: 12px 28px; border-radius: 50px; font-weight: 700; font-size: 0.95rem;
+    }
+    .success-card a:hover { background: var(--blue-light); }
+
+    /* Mobile */
+    @media (max-width: 640px) {
+      .form-body { padding: 24px 20px 32px; }
+      .form-row { grid-template-columns: 1fr; }
+      .checkboxes-grid { grid-template-columns: 1fr; }
+      .nav .hide-mobile { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">Lokal<span>web</span></a>
+      <nav class="nav">
+        <a href="/#tarifs" class="hide-mobile">Tarifs</a>
+        <a href="/form.html" style="color:var(--orange)">Obtenir mon site</a>
+        <a href="/" class="btn-nav">← Retour</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <div style="display:inline-block;background:rgba(249,115,22,0.15);color:var(--orange);font-size:0.85rem;font-weight:700;padding:6px 18px;border-radius:50px;margin-bottom:16px;border:1px solid rgba(249,115,22,0.25)">
+        🚀 Gratuit &amp; sans engagement
+      </div>
+      <h1>Obtenez votre site en 3 minutes</h1>
+      <p>Remplissez le formulaire — votre aperçu est prêt sous 2-3 minutes</p>
+    </div>
+  </section>
+
+  <!-- Form -->
+  <section class="form-page">
+    <div class="container">
+      <div class="form-card">
+
+        <!-- Success state -->
+        <div class="success-card" id="successCard">
+          <div class="icon">🎉</div>
+          <h2>Votre site est en cours de génération !</h2>
+          <p>Vous recevrez un <strong>SMS sous 2-3 minutes</strong> avec votre lien de prévisualisation personnalisé.<br><br>Prenez le temps de le parcourir — c'est votre futur site, sans engagement.</p>
+          <a href="/">← Retour à l'accueil</a>
+        </div>
+
+        <!-- Form body -->
+        <div class="form-body" id="formBody">
+          <form id="leadForm" novalidate>
+
+            <!-- Section 1 -->
+            <div class="form-section">
+              <div class="form-section-title">👤 Vos coordonnées</div>
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="prenom">Prénom <span class="req">*</span></label>
+                  <input type="text" id="prenom" name="prenom" placeholder="Jean" autocomplete="given-name">
+                  <span class="field-error" id="err-prenom">Veuillez saisir votre prénom</span>
+                </div>
+                <div class="form-field">
+                  <label for="nom">Nom <span class="req">*</span></label>
+                  <input type="text" id="nom" name="nom" placeholder="Dupont" autocomplete="family-name">
+                  <span class="field-error" id="err-nom">Veuillez saisir votre nom</span>
+                </div>
+              </div>
+              <div class="form-row" style="margin-top:14px">
+                <div class="form-field">
+                  <label for="telephone">Téléphone <span class="req">*</span></label>
+                  <input type="tel" id="telephone" name="telephone" placeholder="06 12 34 56 78" autocomplete="tel">
+                  <span class="field-error" id="err-telephone">Numéro invalide (format français)</span>
+                </div>
+                <div class="form-field">
+                  <label for="email">Email <small style="color:var(--gray-500);font-weight:400">(optionnel)</small></label>
+                  <input type="email" id="email" name="email" placeholder="jean@exemple.fr" autocomplete="email">
+                </div>
+              </div>
+              <div class="form-row single" style="margin-top:14px">
+                <div class="form-field">
+                  <label for="entreprise">Nom de l'entreprise <small style="color:var(--gray-500);font-weight:400">(optionnel)</small></label>
+                  <input type="text" id="entreprise" name="entreprise" placeholder="Plomberie Dupont">
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="form-section">
+              <div class="form-section-title">🔧 Votre activité</div>
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="metier">Métier <span class="req">*</span></label>
+                  <select id="metier" name="metier">
+                    <option value="">— Sélectionnez —</option>
+                    <option value="plombier">Plombier</option>
+                    <option value="electricien">Électricien</option>
+                    <option value="chauffagiste">Chauffagiste</option>
+                    <option value="climaticien">Climaticien</option>
+                    <option value="mecanicien">Mécanicien</option>
+                    <option value="serrurier">Serrurier</option>
+                    <option value="ebeniste">Ébéniste</option>
+                    <option value="peintre">Peintre</option>
+                    <option value="carreleur">Carreleur</option>
+                    <option value="couvreur">Couvreur</option>
+                    <option value="plaquiste">Plaquiste</option>
+                    <option value="jardinier-paysagiste">Jardinier / Paysagiste</option>
+                    <option value="autre">Autre</option>
+                  </select>
+                  <span class="field-error" id="err-metier">Veuillez sélectionner votre métier</span>
+                </div>
+                <div class="form-field">
+                  <label for="experience">Expérience <span class="req">*</span></label>
+                  <select id="experience" name="experience">
+                    <option value="">— Votre expérience —</option>
+                    <option value="debutant">Débutant (&lt;2 ans)</option>
+                    <option value="experimente">Expérimenté (2-10 ans)</option>
+                    <option value="expert">Expert (&gt;10 ans)</option>
+                  </select>
+                  <span class="field-error" id="err-experience">Veuillez sélectionner votre niveau</span>
+                </div>
+              </div>
+              <div class="form-row" style="margin-top:14px">
+                <div class="form-field">
+                  <label for="ville">Ville principale <span class="req">*</span></label>
+                  <input type="text" id="ville" name="ville" placeholder="Marseille, Aix-en-Provence...">
+                  <span class="field-error" id="err-ville">Veuillez saisir votre ville</span>
+                </div>
+                <div class="form-field">
+                  <label for="rayon">Zone d'intervention <span class="req">*</span></label>
+                  <select id="rayon" name="rayon">
+                    <option value="">— Rayon —</option>
+                    <option value="5km">5 km</option>
+                    <option value="10km">10 km</option>
+                    <option value="20km" selected>20 km</option>
+                    <option value="30km">30 km</option>
+                    <option value="50km">50 km</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 3 -->
+            <div class="form-section">
+              <div class="form-section-title">✅ Services proposés</div>
+              <div class="checkboxes-grid">
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="Dépannage">
+                  <span>🔧 Dépannage</span>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="Installation">
+                  <span>🛠️ Installation</span>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="Rénovation">
+                  <span>🏗️ Rénovation</span>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="Urgences 24h/24">
+                  <span>🚨 Urgences 24h/24</span>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="Sans frais de déplacement">
+                  <span>🚗 Sans frais déplacement</span>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="Devis gratuit">
+                  <span>📄 Devis gratuit</span>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="Garantie décennale">
+                  <span>🛡️ Garantie décennale</span>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="Certifications / Labels">
+                  <span>🏆 Certifications / Labels</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Section 4 -->
+            <div class="form-section">
+              <div class="form-section-title">💬 Infos complémentaires</div>
+              <div class="form-field" style="margin-bottom:14px">
+                <label>Avez-vous un site internet aujourd'hui ?</label>
+                <div class="radio-group">
+                  <label class="radio-item">
+                    <input type="radio" name="hasWebsite" value="true">
+                    <span>✅ Oui</span>
+                  </label>
+                  <label class="radio-item">
+                    <input type="radio" name="hasWebsite" value="false">
+                    <span>❌ Non</span>
+                  </label>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="howFound">Comment nous avez-vous connu ? <small style="color:var(--gray-500);font-weight:400">(optionnel)</small></label>
+                  <select id="howFound" name="howFound">
+                    <option value="">— Sélectionnez —</option>
+                    <option value="google">Google</option>
+                    <option value="bouche-a-oreilles">Bouche à oreilles</option>
+                    <option value="reseaux-sociaux">Réseaux sociaux</option>
+                    <option value="autre">Autre</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-field" style="margin-top:14px">
+                <label for="message">Décrivez votre activité <small style="color:var(--gray-500);font-weight:400">(optionnel)</small></label>
+                <textarea id="message" name="message" placeholder="Spécialités, type de clients, zone..." rows="3"></textarea>
+              </div>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="form-submit" id="submitBtn">
+              <div class="spinner" id="btnSpinner"></div>
+              <span id="submitText">Générer mon site gratuitement →</span>
+            </button>
+
+            <div class="form-status" id="formError"></div>
+
+            <p style="text-align:center;font-size:0.78rem;color:var(--gray-500);margin-top:14px;line-height:1.5">
+              🔒 Vos données sont confidentielles. En envoyant ce formulaire, vous acceptez d'être contacté par Lokalweb.
+            </p>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Validation
+    function validateForm() {
+      var ok = true;
+      var required = ['prenom', 'nom', 'telephone', 'metier', 'ville', 'experience'];
+      required.forEach(function(id) {
+        var el = document.getElementById(id);
+        var val = el ? el.value.trim() : '';
+        if (!val) {
+          el.classList.add('error');
+          var err = document.getElementById('err-' + id);
+          if (err) err.classList.add('show');
+          ok = false;
+        }
+      });
+      // Phone validation
+      var tel = document.getElementById('telephone').value.replace(/\s/g, '');
+      if (tel && !/^(\+33|0033|0)[1-9](\d{8})$/.test(tel)) {
+        document.getElementById('telephone').classList.add('error');
+        document.getElementById('err-telephone').classList.add('show');
+        ok = false;
+      }
+      return ok;
+    }
+
+    // Clear errors on input
+    document.querySelectorAll('.form-field input, .form-field select').forEach(function(el) {
+      el.addEventListener('input', function() {
+        el.classList.remove('error');
+        var err = document.getElementById('err-' + el.id);
+        if (err) err.classList.remove('show');
+      });
+    });
+
+    // Submit
+    document.getElementById('leadForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      if (!validateForm()) {
+        var first = document.querySelector('.field-error.show');
+        if (first) first.closest('.form-field').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      var services = [];
+      document.querySelectorAll('input[name="services"]:checked').forEach(function(cb) { services.push(cb.value); });
+
+      var hasWebsiteEl = document.querySelector('input[name="hasWebsite"]:checked');
+      var prenom = document.getElementById('prenom').value.trim();
+
+      var payload = {
+        prenom: prenom,
+        nom: document.getElementById('nom').value.trim(),
+        telephone: document.getElementById('telephone').value.trim(),
+        email: document.getElementById('email').value.trim() || null,
+        entreprise: document.getElementById('entreprise').value.trim() || null,
+        metier: document.getElementById('metier').value,
+        ville: document.getElementById('ville').value.trim(),
+        rayon: document.getElementById('rayon').value || '20km',
+        services: services,
+        experience: document.getElementById('experience').value || null,
+        hasWebsite: hasWebsiteEl ? hasWebsiteEl.value === 'true' : null,
+        howFound: document.getElementById('howFound').value || null,
+        message: document.getElementById('message').value.trim() || null,
+        source: 'form_page',
+      };
+
+      var submitBtn = document.getElementById('submitBtn');
+      var spinner = document.getElementById('btnSpinner');
+      var submitText = document.getElementById('submitText');
+      var errorEl = document.getElementById('formError');
+
+      submitBtn.disabled = true;
+      spinner.style.display = 'block';
+      submitText.textContent = 'Génération en cours…';
+      errorEl.className = 'form-status';
+
+      try {
+        var res = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        var data = await res.json();
+
+        if (res.ok && data.success) {
+          document.getElementById('formBody').style.display = 'none';
+          var sc = document.getElementById('successCard');
+          sc.querySelector('h2').textContent = 'Merci ' + prenom + ' ! Votre site est en cours de génération.';
+          sc.classList.add('show');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          throw new Error(data.error || 'Une erreur est survenue. Veuillez réessayer.');
+        }
+      } catch (err) {
+        submitBtn.disabled = false;
+        spinner.style.display = 'none';
+        submitText.textContent = 'Générer mon site gratuitement →';
+        errorEl.textContent = '⚠️ ' + (err.message || 'Erreur réseau. Veuillez réessayer.');
+        errorEl.className = 'form-status error';
+      }
+    });
+  </script>
+
+</body>
+</html>
