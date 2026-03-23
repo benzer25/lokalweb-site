@@ -1,0 +1,2 @@
+# Redirect liens courts SMS vers le dashboard
+/p/*  https://dashboard.lokalweb.fr/p/:splat  302
